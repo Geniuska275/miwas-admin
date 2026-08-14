@@ -9,6 +9,8 @@ const LINKS = [
   { to: "/nerd", label: "NERD", icon: "list" },
   { to: "/nysc", label: "NYSC", icon: "list" },
   { to: "/personal", label: "PERSONAL", icon: "list" },
+  { to: "/resume", label: "RESUME", icon: "list" },
+
 
   
 ];

@@ -3,6 +3,9 @@ import { getBookings, saveBookings, getServices, naira } from "../lib/storage.js
 import StatusBadge from "../components/StatusBadge.jsx";
 import Modal from "../components/Modal.jsx";
 
+
+import axios from "axios";
+import { DownloadableImage, downloadImage } from "./download.jsx";
 const STATUSES = ["Paid", "Pending", "Cancelled"];
 
 export default function Resume() {
@@ -12,25 +15,33 @@ export default function Resume() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-
+  const baseUrl="https://meganet-backend-q2fi.onrender.com/api/personal"
   useEffect(() => {
-    setBookings(getBookings());
+    fetchdata()  
     setServices(getServices());
   }, []);
+   const fetchdata=async()=>{
+     try {
+      const data= await axios.get("https://meganet-backend-q2fi.onrender.com/api/resume")
+      console.log("data:",data?.data)
+      setBookings(data?.data.data)
+     } catch (error) {
+      console.log(error)
+     }
+   }
+
 
   const serviceById = useMemo(() => Object.fromEntries(services.map((s) => [s.id, s])), [services]);
-
+  console.log("bookings:",bookings.data)
   const filtered = useMemo(() => {
     return bookings
-      .filter((b) => statusFilter === "All" || b.status === statusFilter)
-      .filter((b) => serviceFilter === "All" || b.serviceId === serviceFilter)
       .filter((b) => {
         const q = search.trim().toLowerCase();
         if (!q) return true;
-        return b.name.toLowerCase().includes(q) || b.email.toLowerCase().includes(q) || b.reference.toLowerCase().includes(q);
+        return b.fullname.toLowerCase().includes(q) ;
       })
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  }, [bookings, search, statusFilter, serviceFilter]);
+  }, [bookings, search]);
 
   const updateStatus = (id, status) => {
     const next = bookings.map((b) => (b.id === id ? { ...b, status } : b));
@@ -42,48 +53,37 @@ export default function Resume() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="font-display text-2xl font-semibold text-brand-green-dark">Bookings</h1>
-        <p className="text-sm opacity-60 mt-1">{filtered.length} of {bookings.length} bookings</p>
+        <h1 className="font-display text-2xl font-semibold text-brand-green-dark">Resume</h1>
+        <p className="text-sm opacity-60 mt-1">{filtered.length} of {bookings.length} Resume</p>
       </div>
 
       <div className="flex flex-wrap gap-3 mb-5">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search name, email or reference…"
-          className="flex-1 min-w-[220px] px-4 py-2.5 rounded-lg bg-white outline-none text-sm border border-brand-green/20 focus:border-brand-green transition-colors"
+          placeholder="Search first choice or second choice"
+          className="flex-1 min-w-[300px] px-4 py-2.5 rounded-lg bg-white outline-none text-sm border border-brand-green/20 focus:border-brand-green transition-colors"
         />
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-2.5 rounded-lg bg-white outline-none text-sm border border-brand-green/20"
-        >
-          <option>All</option>
-          {STATUSES.map((s) => (
-            <option key={s}>{s}</option>
-          ))}
-        </select>
-        <select
-          value={serviceFilter}
-          onChange={(e) => setServiceFilter(e.target.value)}
-          className="px-4 py-2.5 rounded-lg bg-white outline-none text-sm border border-brand-green/20"
-        >
-          <option value="All">All services</option>
-          {services.map((s) => (
-            <option key={s.id} value={s.id}>{s.title}</option>
-          ))}
-        </select>
+       
+       
       </div>
 
       <div className="bg-white rounded-2xl border border-brand-green/10 overflow-hidden overflow-x-auto">
         <table className="w-full text-sm min-w-[720px]">
           <thead>
             <tr className="text-left border-b border-brand-green/10 bg-brand-cream">
-              <th className="px-5 py-3 font-semibold opacity-70">Name</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Service</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Price</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Date</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Status</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Full Name</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Gender</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Dob</th>
+              <th className="px-5 py-3 font-semibold opacity-70">LG Of Origin</th>
+              <th className="px-5 py-3 font-semibold opacity-70">State Of Origin</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Phone Number</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Email Address</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Card Number</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Home Address</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Hobby</th>
+              
+
               <th className="px-5 py-3"></th>
             </tr>
           </thead>
@@ -91,13 +91,22 @@ export default function Resume() {
             {filtered.map((b) => (
               <tr key={b.id} className="border-b border-brand-green/5 last:border-0 hover:bg-brand-cream/60 transition-colors">
                 <td className="px-5 py-3.5">
-                  <p className="font-semibold text-brand-green-dark">{b.name}</p>
-                  <p className="text-xs opacity-50">{b.email}</p>
+                  <p className="font-semibold text-brand-green-dark">{b.fullname}</p>
                 </td>
-                <td className="px-5 py-3.5 opacity-80">{serviceById[b.serviceId]?.title || b.serviceId}</td>
-                <td className="px-5 py-3.5 opacity-80">{naira(serviceById[b.serviceId]?.price)}</td>
-                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short" })}</td>
-                <td className="px-5 py-3.5"><StatusBadge status={b.status} /></td>
+
+
+                <td>
+                  <p className="text-xs opacity-50">{b.gender}</p>
+                </td>
+                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short",year:"numeric" })}</td>
+
+                 <td className="px-5 py-3.5 opacity-80">{b.l_origin}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.origin}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.phone_number}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.email_address}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.card_number}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.hobby}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.email_address}</td>  
                 <td className="px-5 py-3.5 text-right">
                   <button onClick={() => setSelected(b)} className="text-brand-green font-semibold text-xs hover:underline">
                     View
@@ -115,68 +124,73 @@ export default function Resume() {
       </div>
 
       {selected && (
-        <Modal title={selected.name} onClose={() => setSelected(null)}>
+        <Modal title={"RESUME"} onClose={() => setSelected(null)}>
           <div className="space-y-4 text-sm">
             <div className="flex items-center justify-between">
-              <span className="opacity-60">Service</span>
-              <span className="font-semibold text-brand-green-dark">{serviceById[selected.serviceId]?.title}</span>
+              <span className="opacity-60">Spoken</span>
+              <span className="font-semibold text-brand-green-dark">{selected.spoken}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">Fee</span>
-              <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span>
+              <span className="opacity-60">From</span>
+              <span className="font-semibold text-brand-green-dark">{selected.pfrom}</span>
+
+              {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">Email</span>
-              <span>{selected.email}</span>
+              <span className="opacity-60">TO</span>
+              <span>{selected.pto}</span>
+            </div>
+            <h1>SECONDARY</h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">FROM</span>
+              <span>{selected.sfrom}</span>
+            </div>
+            <h1>Director</h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">TO</span>
+              <span>{selected.sto}</span>
+            </div>
+            <h1>Tertiary </h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">FROM</span>
+              <span className="text-right">{selected.tfrom}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">Phone</span>
-              <span>{selected.phone}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">Preferred contact</span>
-              <span>{selected.contactMethod}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">Farm / business size</span>
-              <span className="text-right">{selected.farmSize}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">Timeline</span>
-              <span>{selected.timeline}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">Location</span>
-              <span>{selected.location}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">Heard about us via</span>
-              <span>{selected.source}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">Reference</span>
-              <span className="font-mono text-xs">{selected.reference}</span>
+              <span className="opacity-60">TO</span>
+              <span>{selected.tto}</span>    
             </div>
 
-            <div className="pt-3 border-t border-brand-green/10">
-              <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Update status</p>
-              <div className="flex gap-2">
-                {STATUSES.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => updateStatus(selected.id, s)}
-                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                    style={
-                      selected.status === s
-                        ? { backgroundColor: "#007518", color: "#fcfbfe", borderColor: "#007518" }
-                        : { borderColor: "#00751833", color: "#12200f" }
-                    }
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
+             <div className="flex items-center justify-between">
+              <span className="opacity-60">Qualification</span>
+              <span>{selected.qualification}</span>    
             </div>
+
+             <div className="flex items-center justify-between">
+              <span className="opacity-60">Tertiary Qualification</span>
+              <span>{selected.tqualification}</span>    
+            </div>
+
+             <div className="flex items-center justify-between">
+              <span className="opacity-60">Company</span>
+              <span>{selected.company}</span>    
+            </div>
+             <div className="flex items-center justify-between">
+              <span className="opacity-60">POST</span>
+              <span>{selected.post}</span>    
+            </div>
+
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">POST</span>
+              <span>{selected.to}</span>    
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">POST</span>
+              <span>{selected.te}</span>    
+            </div>
+          
+
+            
+           
           </div>
         </Modal>
       )}

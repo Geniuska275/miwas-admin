@@ -11,6 +11,8 @@ import Settings from "./pages/Settings.jsx";
 import Ngos from "./pages/ngos.jsx";
 import Nysc from "./pages/nysc.jsx";
 import Nerd from "./pages/Nerd.jsx";
+import Personal from "./pages/Personal.jsx";
+import Resume from "./pages/Resume.jsx";
 
 function DashboardLayout({ children }) {
   return (
@@ -72,6 +74,26 @@ export default function App() {
             <ProtectedRoute>
               <DashboardLayout>
                 <Nysc />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/personal"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <Personal />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/resume"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <Resume />
               </DashboardLayout>
             </ProtectedRoute>
           }
