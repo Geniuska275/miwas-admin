@@ -33,7 +33,7 @@ export default function Login() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <p className="font-display text-2xl font-semibold text-brand-green-dark">
-            Verdant <span className="text-brand-gold">&amp;</span> Co.
+            MIWAS ADMIN
           </p>
           <p className="text-sm opacity-60 mt-1">Admin dashboard</p>
         </div>
