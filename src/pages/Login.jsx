@@ -77,11 +77,7 @@ export default function Login() {
           </div>
         </div>
 
-        <div className="mt-5 text-center text-xs opacity-50 leading-relaxed">
-          Demo credentials — email <span className="font-semibold">{DEMO_CREDENTIALS.email}</span>, password{" "}
-          <span className="font-semibold">{DEMO_CREDENTIALS.password}</span>. Replace this with real
-          backend-verified auth before going live.
-        </div>
+
       </div>
     </div>
   );
