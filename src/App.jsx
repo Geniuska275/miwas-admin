@@ -13,6 +13,7 @@ import Nysc from "./pages/nysc.jsx";
 import Nerd from "./pages/Nerd.jsx";
 import Personal from "./pages/Personal.jsx";
 import Resume from "./pages/Resume.jsx";
+import CompanyName from "./pages/CompanyName.jsx";
 
 function DashboardLayout({ children }) {
   return (
@@ -94,6 +95,16 @@ export default function App() {
             <ProtectedRoute>
               <DashboardLayout>
                 <Resume />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/company-name"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <CompanyName />
               </DashboardLayout>
             </ProtectedRoute>
           }

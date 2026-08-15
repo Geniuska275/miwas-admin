@@ -1,13 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
 
-// -----------------------------------------------------------------------------
-// MOCK AUTH. This checks against a hardcoded credential and stores a flag in
-// localStorage — good enough to gate a demo dashboard, not good enough for
-// production. For a real deployment, replace `login()` with a call to your
-// backend's auth endpoint and store a real session token (ideally in an
-// httpOnly cookie set by the server, not localStorage).
-// -----------------------------------------------------------------------------
-
 const DEMO_EMAIL = "info@meganet.com.ng";
 const DEMO_PASSWORD = "meganet";
 const SESSION_KEY = "vd_admin_session";

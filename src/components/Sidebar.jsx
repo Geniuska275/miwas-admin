@@ -10,6 +10,8 @@ const LINKS = [
   { to: "/nysc", label: "NYSC", icon: "list" },
   { to: "/personal", label: "PERSONAL", icon: "list" },
   { to: "/resume", label: "RESUME", icon: "list" },
+  { to: "/company-name", label: "COMPANY NAME", icon: "list" },
+
 
 
   
