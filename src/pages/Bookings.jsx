@@ -192,6 +192,12 @@ export default function Bookings() {
                        console.log(src)
                       downloadImage(src,selected.file.originalName)
                     }}>download</button>
+                    <h1 style={{
+                      textAlign:"center",
+                      fontSize:"13px"
+                    }}>
+                      Passport Photograph
+                    </h1>
                 </div>
                 <div>
                    <img 
@@ -210,6 +216,13 @@ export default function Bookings() {
                        console.log(src)
                       downloadImage(src,selected.file.originalName)
                     }}>download</button>
+                    <h1 style={{
+                      textAlign:"center",
+                      fontSize:"13px"
+                    }}>
+                      
+                      Nin Slip
+                    </h1>
                 </div>
                 <div>
                    <img  style={{
@@ -226,6 +239,13 @@ export default function Bookings() {
                        console.log(src)
                       downloadImage(src,selected.file3.originalName)
                     }}>download</button>
+                    <h1 style={{
+                      textAlign:"center",
+                      fontSize:"13px"
+                    }}>
+                      
+                      Signature
+                    </h1>
                 </div>
                 {/* {STATUSES.map((s) => (
                   <button
