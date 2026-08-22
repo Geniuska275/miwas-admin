@@ -15,7 +15,7 @@ export default function Personal() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const baseUrl="https://meganet-backend-q2fi.onrender.com/api/personal"
+  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/images/"
   useEffect(() => {
     fetchdata()  
     setServices(getServices());
@@ -154,18 +154,29 @@ export default function Personal() {
             <div className="pt-3 border-t border-brand-green/10">
               <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Images</p>
               <div className="flex gap-2">
-                <div>
-                 <img src={baseUrl + selected.file.path} alt={selected.file.originalName} />
-                 
-                  <button
-                                      className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                    
-                   onClick={()=>{
-                    const src=baseUrl + selected.file.path;
-                       
-                      downloadImage(src,selected.file.originalName)
-                    }}>download</button>
-                </div>
+                                            <div>
+                                               <img  style={{
+                                                width:"80px",
+                                                height:"80px",
+                                                objectFit:"cover",
+                                                marginBottom:"10px"
+                                               }} src={baseUrl + selected.file3.fileName} alt={selected.file3.originalName} />
+                                              <button
+                                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                                                
+                                               onClick={()=>{
+                                                const src=baseUrl + selected.file3.fileName;
+                                                   console.log(src)
+                                                  downloadImage(src,selected.file3.originalName)
+                                                }}>download</button>
+                                                <h1 style={{
+                                                  textAlign:"center",
+                                                  fontSize:"13px"
+                                                }}>
+                                                  
+                                                  Signature
+                                                </h1>
+                                            </div>
                 {/* {STATUSES.map((s) => (
                   <button
                     key={s}
