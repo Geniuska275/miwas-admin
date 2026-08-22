@@ -231,7 +231,7 @@ export default function Ngos() {
                                }}
                                src={baseUrl + selected.file2.fileName} alt={selected.file.originalName} />
                               <button
-                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
                                 
                                onClick={()=>{
                                 const src=baseUrl + selected.file.fileName;
