@@ -15,7 +15,8 @@ export default function Ngos() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const baseUrl="https://meganet-backend-q2fi.onrender.com/api/ngo"
+  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/images/"
+  
   useEffect(() => {
     fetchdata()  
     setServices(getServices());
