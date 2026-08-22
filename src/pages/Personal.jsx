@@ -160,14 +160,14 @@ export default function Personal() {
                                                 height:"80px",
                                                 objectFit:"cover",
                                                 marginBottom:"10px"
-                                               }} src={baseUrl + selected.file3.fileName} alt={selected.file3.originalName} />
+                                               }} src={baseUrl + selected.file.fileName} alt={selected.file.originalName} />
                                               <button
                                                                   className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
                                                 
                                                onClick={()=>{
-                                                const src=baseUrl + selected.file3.fileName;
+                                                const src=baseUrl + selected.file.fileName;
                                                    console.log(src)
-                                                  downloadImage(src,selected.file3.originalName)
+                                                  downloadImage(src,selected.file.originalName)
                                                 }}>download</button>
                                                 <h1 style={{
                                                   textAlign:"center",
