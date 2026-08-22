@@ -55,8 +55,8 @@ export default function Nerd() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="font-display text-2xl font-semibold text-brand-green-dark">Business</h1>
-        <p className="text-sm opacity-60 mt-1">{filtered.length} of {bookings.length} business</p>
+        <h1 className="font-display text-2xl font-semibold text-brand-green-dark">Nerd</h1>
+        <p className="text-sm opacity-60 mt-1">{filtered.length} of {bookings.length} Nerd</p>
       </div>
 
       <div className="flex flex-wrap gap-3 mb-5">
