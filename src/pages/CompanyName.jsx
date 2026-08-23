@@ -15,8 +15,7 @@ export default function CompanyName() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  // const baseUrl="https://meganet-backend-q2fi.onrender.com/api/nysc"
-    const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/images/"
+  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/images/"
   
   useEffect(() => {
     fetchdata()  
@@ -26,7 +25,7 @@ export default function CompanyName() {
      try {
       const data= await axios.get("https://meganet-backend-q2fi.onrender.com/api/forms")
       console.log("data:",data?.data)
-      setBookings(data?.data)
+      setBookings(data?.data.data)
      } catch (error) {
       console.log(error)
      }
@@ -36,7 +35,7 @@ export default function CompanyName() {
   const serviceById = useMemo(() => Object.fromEntries(services.map((s) => [s.id, s])), [services]);
   console.log("bookings:",bookings)
   const filtered = useMemo(() => {
-    return bookings.data
+    return bookings
       .filter((b) => {
         const q = search.trim().toLowerCase();
         if (!q) return true;
@@ -168,7 +167,7 @@ export default function CompanyName() {
                                                }}
                                                src={baseUrl + selected.file.fileName} alt={selected.file.originalName} />
                                               <button
-                                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                                                className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
                                                 
                                                onClick={()=>{
                                                 const src=baseUrl + selected.file.fileName;
