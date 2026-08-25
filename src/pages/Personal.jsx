@@ -79,6 +79,8 @@ export default function Personal() {
               <th className="px-5 py-3 font-semibold opacity-70">Study</th>
               <th className="px-5 py-3 font-semibold opacity-70">Destination</th>
               <th className="px-5 py-3 font-semibold opacity-70">Website </th>
+              <th className="px-5 py-3 font-semibold opacity-70">Cost </th>
+
 
               <th className="px-5 py-3"></th>
             </tr>
@@ -97,6 +99,8 @@ export default function Personal() {
                 <td className="px-5 py-3.5 opacity-80">{b.study}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.destination}</td> 
                 <td className="px-5 py-3.5 opacity-80">{b.website}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.cost}</td> 
+
                 
                 <td className="px-5 py-3.5 text-right">
                   <button onClick={() => setSelected(b)} className="text-brand-green font-semibold text-xs hover:underline">

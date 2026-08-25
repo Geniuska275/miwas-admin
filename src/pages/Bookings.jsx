@@ -32,7 +32,7 @@ export default function Bookings() {
 
 
   const serviceById = useMemo(() => Object.fromEntries(services.map((s) => [s.id, s])), [services]);
-  console.log("bookings:",bookings.data)
+
   const filtered = useMemo(() => {
     return bookings
       .filter((b) => {
@@ -189,7 +189,7 @@ export default function Bookings() {
                     
                    onClick={()=>{
                     const src=baseUrl + selected.file.fileName;
-                       console.log(src)
+                       console.log("src:",src)
                       downloadImage(src,selected.file.originalName)
                     }}>download</button>
                     <h1 style={{
