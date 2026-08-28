@@ -16,7 +16,7 @@ export default function Personal() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/pdfs"
+  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
   useEffect(() => {
     fetchdata()  
     setServices(getServices());
