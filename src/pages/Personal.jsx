@@ -167,8 +167,9 @@ export default function Personal() {
                                                 objectFit:"cover",
                                                 marginBottom:"10px"
                                                }} src={baseUrl + selected.file.fileName} alt={selected.file.originalName} /> */}
-                                  <PdfViewer url={baseUrl + selected.file.fileName}/>
-                                  
+                                  {/* <PdfViewer url={baseUrl + selected.file.fileName}/> */}
+                                            <h1>{selected.file.fileName}</h1>
+                                
                                              <a href={baseUrl+selected.file.fileName} download="report.pdf">
       
                                               <button
