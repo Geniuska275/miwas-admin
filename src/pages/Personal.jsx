@@ -170,12 +170,14 @@ export default function Personal() {
                                   {/* <PdfViewer url={baseUrl + selected.file.fileName}/> */}
                                             <h1>{selected.file.fileName}</h1>
                                 
-                                             <a href={baseUrl+selected.file.fileName} download>
-      
-                                              <button
+                                                  <button
                                                   className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                  >download</button>
-                                                                  </a>
+                                                onClick={() => handleDownload(baseUrl + selected.file.fileName, selected.file.fileName)}
+                                                  >
+                                                  download
+                                                 </button>
+      
+                                                                 
                                                 <h1 style={{
                                                   textAlign:"center",
                                                   fontSize:"13px"
