@@ -6,6 +6,7 @@ import Modal from "../components/Modal.jsx";
 
 import axios from "axios";
 import { DownloadableImage, downloadImage } from "./download.jsx";
+import PdfViewer from "../components/pdfviewer.jsx";
 const STATUSES = ["Paid", "Pending", "Cancelled"];
 
 export default function Personal() {
@@ -15,7 +16,7 @@ export default function Personal() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/images/"
+  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/pdfs"
   useEffect(() => {
     fetchdata()  
     setServices(getServices());
@@ -158,21 +159,22 @@ export default function Personal() {
             <div className="pt-3 border-t border-brand-green/10">
               <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Images</p>
               <div className="flex gap-2">
-                                            <div>
+                <div>
+                                            {/* <div>
                                                <img  style={{
                                                 width:"80px",
                                                 height:"80px",
                                                 objectFit:"cover",
                                                 marginBottom:"10px"
-                                               }} src={baseUrl + selected.file.fileName} alt={selected.file.originalName} />
+                                               }} src={baseUrl + selected.file.fileName} alt={selected.file.originalName} /> */}
+                                  <PdfViewer url={baseUrl + selected.file.fileName}/>
+                                  
+                                             <a href={baseUrl+selected.file.fileName} download="report.pdf">
+      
                                               <button
-                                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                
-                                               onClick={()=>{
-                                                const src=baseUrl + selected.file.fileName;
-                                                   console.log(src)
-                                                  downloadImage(src,selected.file.originalName)
-                                                }}>download</button>
+                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                                                  >download</button>
+                                                                  </a>
                                                 <h1 style={{
                                                   textAlign:"center",
                                                   fontSize:"13px"
