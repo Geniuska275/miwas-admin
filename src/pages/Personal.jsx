@@ -157,7 +157,7 @@ export default function Personal() {
 
             
             <div className="pt-3 border-t border-brand-green/10">
-              <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Images</p>
+              <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download PDF</p>
               <div className="flex gap-2">
                 <div>
                                             {/* <div>
@@ -170,7 +170,7 @@ export default function Personal() {
                                   {/* <PdfViewer url={baseUrl + selected.file.fileName}/> */}
                                             <h1>{selected.file.fileName}</h1>
                                 
-                                             <a href={baseUrl+selected.file.fileName} download="report.pdf">
+                                             <a href={baseUrl+selected.file.fileName} download={selected.file.fileName}>
       
                                               <button
                                                   className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
