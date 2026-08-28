@@ -7,6 +7,7 @@ import Modal from "../components/Modal.jsx";
 import axios from "axios";
 import { DownloadableImage, downloadImage } from "./download.jsx";
 import PdfViewer from "../components/pdfviewer.jsx";
+import handleDownload from "../components/download.jsx";
 const STATUSES = ["Paid", "Pending", "Cancelled"];
 
 export default function Personal() {
