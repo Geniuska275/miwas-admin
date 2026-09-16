@@ -14,11 +14,15 @@ import Nerd from "./pages/Nerd.jsx";
 import Personal from "./pages/Personal.jsx";
 import Resume from "./pages/Resume.jsx";
 import CompanyName from "./pages/CompanyName.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function DashboardLayout({ children }) {
   return (
     <div className="min-h-screen flex bg-brand-cream font-sans text-brand-ink">
       <Sidebar />
+        <ToastContainer />
+
       <main className="flex-1 p-8">{children}</main>
     </div>
   );

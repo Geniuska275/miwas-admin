@@ -5,7 +5,7 @@ import Modal from "../components/Modal.jsx";
 
 
 import axios from "axios";
-import { DownloadableImage, downloadImage } from "./download.jsx";
+import handleDownload from "../components/download.jsx";
 const STATUSES = ["Paid", "Pending", "Cancelled"];
 
 export default function Nysc() {
@@ -15,7 +15,7 @@ export default function Nysc() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/images/"
+  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
   
   useEffect(() => {
     fetchdata()  
@@ -198,58 +198,51 @@ export default function Nysc() {
 
             
             <div className="pt-3 border-t border-brand-green/10">
-              <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Images</p>
+              <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Documents</p>
               <div className="flex gap-2">
-                       <div>
-                              <img 
-                                               style={{
-                                                width:"80px",
-                                                height:"80px",
-                                                objectFit:"cover",
-                                                marginBottom:"10px"
-                                               }}
-                                               src={baseUrl + selected.file.fileName} alt={selected.file.originalName} />
-                                              <button
-                                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                
-                                               onClick={()=>{
-                                                const src=baseUrl + selected.file.fileName;
-                                                   console.log(src)
-                                                  downloadImage(src,selected.file.originalName)
-                                                }}>download</button>
+                <div>
                                                 <h1 style={{
-                                                  textAlign:"center",
-                                                  fontSize:"13px"
-                                                }}>
-                                                  Statement of Result
+                                                  fontSize:"14px"
+                                                }}>{selected.file.fileName}</h1>
+                             
+                                                  <button
+                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                                                onClick={() => handleDownload(baseUrl + selected.file.fileName, selected.file.fileName)}
+                                                  >
+                                                  download
+                                                 </button>
+      
+                                                                 
+                                                <h1 
+                                               style={{
+                                                  fontSize:"14px"
+                                                }}
+                                                >
+                         
+                                                  Statement of result
                                                 </h1>
                                             </div>
-                                            <div>
-                                               <img 
-                                                style={{
-                                                width:"80px",
-                                                height:"80px",
-                                                objectFit:"cover",
-                                                marginBottom:"10px"
-                                               }}
-                                               src={baseUrl + selected.file2.fileName} alt={selected.file.originalName} />
-                                              <button
+                       <div>
+                             <div>
+                                                <h1>{selected.file2.fileName}</h1>
+                             
+                                                  <button
                                                   className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                
-                                               onClick={()=>{
-                                                const src=baseUrl + selected.file.fileName;
-                                                   console.log(src)
-                                                  downloadImage(src,selected.file.originalName)
-                                                }}>download</button>
+                                                onClick={() => handleDownload(baseUrl + selected.file2.fileName, selected.file2.fileName)}
+                                                  >
+                                                  download
+                                                 </button>
+      
+                                                                 
                                                 <h1 style={{
-                                                  textAlign:"center",
-                                                  fontSize:"13px"
+                                             
                                                 }}>
                                                   
                                                   Signature
                                                 </h1>
                                             </div>
-                                            
+                                           
+                                            </div>
                 {/* {STATUSES.map((s) => (
                   <button
                     key={s}
