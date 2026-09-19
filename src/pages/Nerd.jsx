@@ -16,26 +16,26 @@ export default function Nerd() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
-  const baseUrl2="https://meganet-backend-q2fi.onrender.com/uploads/images/"
-  
+  const baseUrl = "https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
+  const baseUrl2 = "https://meganet-backend-q2fi.onrender.com/uploads/images/"
+
   useEffect(() => {
-    fetchdata()  
+    fetchdata()
     setServices(getServices());
   }, []);
-   const fetchdata=async()=>{
-     try {
-      const data= await axios.get("https://meganet-backend-q2fi.onrender.com/api/nerd")
-      console.log("data:",data?.data)
+  const fetchdata = async () => {
+    try {
+      const data = await axios.get("https://meganet-backend-q2fi.onrender.com/api/nerd")
+      console.log("data:", data?.data)
       setBookings(data?.data.data)
-     } catch (error) {
+    } catch (error) {
       console.log(error)
-     }
-   }
+    }
+  }
 
 
   const serviceById = useMemo(() => Object.fromEntries(services.map((s) => [s.id, s])), [services]);
-  console.log("bookings:",bookings.data)
+  console.log("bookings:", bookings.data)
   const filtered = useMemo(() => {
     return bookings
       .filter((b) => statusFilter === "All" || b.status === statusFilter)
@@ -43,7 +43,7 @@ export default function Nerd() {
       .filter((b) => {
         const q = search.trim().toLowerCase();
         if (!q) return true;
-        return b.first_choice.toLowerCase().includes(q) || b.second_choice.toLowerCase().includes(q) ;
+        return b.first_choice.toLowerCase().includes(q) || b.second_choice.toLowerCase().includes(q);
       })
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   }, [bookings, search, statusFilter, serviceFilter]);
@@ -69,7 +69,7 @@ export default function Nerd() {
           placeholder="Search name, email or reference…"
           className="flex-1 min-w-[300px] px-4 py-2.5 rounded-lg bg-white outline-none text-sm border border-brand-green/20 focus:border-brand-green transition-colors"
         />
-       
+
       </div>
 
       <div className="bg-white rounded-2xl border border-brand-green/10 overflow-hidden overflow-x-auto">
@@ -99,15 +99,15 @@ export default function Nerd() {
                 <td>
                   <p className="text-xs opacity-50">{b.middlename}</p>
                 </td>
-                 <td className="px-5 py-3.5 opacity-80">{b.Course}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.Department}</td> 
-                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short",year:"numeric" })}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.Email_address}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.nationality}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.MaritalStatus}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.MatricNumber}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.Lga}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.Phone}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.Course}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.Department}</td>
+                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.Email_address}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.nationality}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.MaritalStatus}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.MatricNumber}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.Lga}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.Phone}</td>
 
 
                 <td className="px-5 py-3.5 text-right">
@@ -159,108 +159,115 @@ export default function Nerd() {
               <span className="opacity-60">Origin</span>
               <span>{selected.origin}</span>
             </div>
-            
 
-               <div className="pt-3 border-t border-brand-green/10">
-              <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download PDF</p>
+
+            <div className="pt-3 border-t border-brand-green/10">
+              <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download documents</p>
               <div className="">
-                      <div>
-                         
-                                            </div>
-                                              <img 
-                                                           style={{
-                                                            width:"80px",
-                                                            height:"80px",
-                                                            objectFit:"cover",
-                                                            marginBottom:"10px"
-                                                           }}
-                                                           src={baseUrl2 + selected.file.fileName} alt={selected.file.originalName} />
-                            
-                                                              <button
-                                                              className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                            onClick={() => handleDownload(baseUrl2 + selected.file.fileName, selected.file.fileName)}
-                                                              >
-                                                              download
-                                                             </button>    
-
-                                            <div>
-                        
-                          <h1>{selected.file2.fileName}</h1>
-                             
-                                  <button
-                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                onClick={() => handleDownload(baseUrl + selected.file2.fileName, selected.file2.fileName)}
-                                                  >
-                                                  download
-                                                 </button>
-      
-                                                                 
-                                                <h1 style={{
-                                                  textAlign:"center",
-                                                  fontSize:"13px"
-                                                }}>
-                                                  
-                                                  Signature
-                                                </h1>
-                                            </div>
-                              <div>
-                          <h1>{selected.file3.fileName}</h1>
-                             
-                                  <button
-                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                onClick={() => handleDownload(baseUrl + selected.file3.fileName, selected.file3.fileName)}
-                                                  >
-                                                  download
-                                                 </button>
-      
-                                                                 
-                                                <h1 style={{
-                                                  textAlign:"center",
-                                                  fontSize:"13px"
-                                                }}>
-                                                  
-                                                  Signature
-                                                </h1>
-                                            </div>
                 <div>
-                          <h1>{selected?.file4?.fileName}</h1>
-                             
-                                  <button
-                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                onClick={() => handleDownload(baseUrl + selected?.file4?.fileName, selected?.file4?.fileName)}
-                                                  >
-                                                  download
-                                                 </button>
-      
-                                                                 
-                                                <h1 style={{
-                                                  textAlign:"center",
-                                                  fontSize:"13px"
-                                                }}>
-                                                  
-                                                  Signature
-                                                </h1>
-                                            </div>
+
+                </div>
+                <img
+                  style={{
+                    width: "80px",
+                    height: "80px",
+                    objectFit: "cover",
+                    marginBottom: "10px"
+                  }}
+                  src={baseUrl2 + selected.file.fileName} alt={selected.file.originalName} />
+
+                <button
+                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                  onClick={() => handleDownload(baseUrl2 + selected.file.fileName, selected.file.fileName)}
+                >
+                  download
+                </button>
 
                 <div>
-                          <h1>{selected?.file5?.fileName}</h1>
-                             
-                                  <button
-                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                onClick={() => handleDownload(baseUrl + selected?.file5?.fileName, selected?.file5?.fileName)}
-                                                  >
-                                                  download
-                                                 </button>
-      
-                                                                 
-                                                <h1 style={{
-                                                  textAlign:"center",
-                                                  fontSize:"13px"
-                                                }}>
-                                                  
-                                                  Signature
-                                                </h1>
-                                            </div>
+
+                  <h1>{selected.file2.fileName}</h1>
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected.file2.fileName, selected.file2.fileName)}
+                  >
+                    download
+                  </button>
+
+
+                  <h1 style={{
+
+                    fontSize: "13px",
+                    fontWeight: "bold"
+
+                  }}>
+
+                    NIN SLIP OR CARD
+                  </h1>
+                </div>
+                <div>
+                  <h1>{selected.file3.fileName}</h1>
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected.file3.fileName, selected.file3.fileName)}
+                  >
+                    download
+                  </button>
+
+
+                  <h1 style={{
+
+                    fontSize: "13px",
+                    fontWeight: "bold"
+
+                  }}>
+
+                    STATEMENT OF RESULT
+                  </h1>
+                </div>
+                <div>
+                  <h1>{selected?.file4?.fileName}</h1>
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected?.file4?.fileName, selected?.file4?.fileName)}
+                  >
+                    download
+                  </button>
+
+
+                  <h1 style={{
+
+                    fontSize: "13px",
+                    fontWeight: "bold"
+
+                  }}>
+
+                    PROJECT SOFT COPY PDF/DOC
+                  </h1>
+                </div>
+
+                <div>
+                  <h1>{selected?.file5?.fileName}</h1>
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected?.file5?.fileName, selected?.file5?.fileName)}
+                  >
+                    download
+                  </button>
+
+
+                  <h1 style={{
+
+                    fontSize: "13px",
+                    fontWeight: "bold"
+                  }}>
+
+                    SIGNED PROJECT CERTIFICATE PAGE
+                  </h1>
+                </div>
               </div>
             </div>
 

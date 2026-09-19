@@ -201,7 +201,6 @@ export default function Nysc() {
             </div>
 
             <h1>Emergency Contact</h1>
-
             <div className="flex items-center justify-between">
               <span className="opacity-60">Relationship</span>
               <span>{selected.E_Relationship}</span>
