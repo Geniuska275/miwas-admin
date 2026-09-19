@@ -15,25 +15,25 @@ export default function Nysc() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
-  
+  const baseUrl = "https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
+
   useEffect(() => {
-    fetchdata()  
+    fetchdata()
     setServices(getServices());
   }, []);
-   const fetchdata=async()=>{
-     try {
-      const data= await axios.get("https://meganet-backend-q2fi.onrender.com/api/nysc")
-      console.log("data:",data?.data)
+  const fetchdata = async () => {
+    try {
+      const data = await axios.get("https://meganet-backend-q2fi.onrender.com/api/nysc")
+      console.log("data:", data?.data)
       setBookings(data?.data.data)
-     } catch (error) {
+    } catch (error) {
       console.log(error)
-     }
-   }
+    }
+  }
 
 
   const serviceById = useMemo(() => Object.fromEntries(services.map((s) => [s.id, s])), [services]);
-  console.log("bookings:",bookings.data)
+  console.log("bookings:", bookings.data)
   const filtered = useMemo(() => {
     return bookings
       .filter((b) => {
@@ -65,8 +65,8 @@ export default function Nysc() {
           placeholder="Search first choice or second choice"
           className="flex-1 min-w-[300px] px-4 py-2.5 rounded-lg bg-white outline-none text-sm border border-brand-green/20 focus:border-brand-green transition-colors"
         />
-       
-       
+
+
       </div>
 
       <div className="bg-white rounded-2xl border border-brand-green/10 overflow-hidden overflow-x-auto">
@@ -88,21 +88,21 @@ export default function Nysc() {
           </thead>
           <tbody>
             {filtered.map((b) => (
-              <tr key={b.id} className="border-b border-brand-green/5 last:border-0 hover:bg-brand-cream/60 transition-colors">  
+              <tr key={b.id} className="border-b border-brand-green/5 last:border-0 hover:bg-brand-cream/60 transition-colors">
                 <td>
                   <p className="text-xs opacity-50 px-5 py-3.5">{b.name}</p>
                 </td>
-                 <td className="px-5 py-3.5 opacity-80">{b.Email_address}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.nin}</td> 
-                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short" ,year:"numeric"})}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.Email_address}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.nin}</td>
+                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.state}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.lgo}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.address}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.stateBefore}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.bloodgroup}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.genotype}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.lgo}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.address}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.stateBefore}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.bloodgroup}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.genotype}</td>
 
-                
+
                 <td className="px-5 py-3.5 text-right">
                   <button onClick={() => setSelected(b)} className="text-brand-green font-semibold text-xs hover:underline">
                     View more
@@ -142,19 +142,35 @@ export default function Nysc() {
             </div>
             <h1>Primary School</h1>
             <div className="flex items-center justify-between">
+              <span className="opacity-60">School name</span>
+              <span className="text-right">{selected.pschname}</span>
+            </div>
+            <div className="flex items-center justify-between">
               <span className="opacity-60">From</span>
-              <span>{selected.pfrom}</span>
+              <span>{selected.prifrom}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">To</span>
-              <span className="text-right">{selected.pto}</span>
+              <span className="text-right">{selected.prito}</span>
             </div>
             <h1>Secondary School</h1>
-              <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">School name</span>
+              <span className="text-right">{selected.sschname}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">From</span>
+              <span>{selected.secfrom}</span>
+            </div>
+            <div className="flex items-center justify-between">
               <span className="opacity-60">To</span>
               <span>{selected.secto}</span>
             </div>
             <h1>Tertiary</h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">School name</span>
+              <span className="text-right">{selected.tschname}</span>
+            </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">From</span>
               <span className="text-right">{selected.tetfrom}</span>
@@ -163,7 +179,7 @@ export default function Nysc() {
               <span className="opacity-60">To</span>
               <span className="text-right">{selected.tetto}</span>
             </div>
-            
+
             <h1>next of kin</h1>
 
             <div className="flex items-center justify-between">
@@ -174,75 +190,100 @@ export default function Nysc() {
               <span className="opacity-60">Name</span>
               <span className="text-right">{selected.kinName}</span>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">Email</span>
-              <span className="text-right">{selected.kinEmail}</span>
-            </div>
+
             <div className="flex items-center justify-between">
               <span className="opacity-60">Phone Number</span>
               <span>{selected.kinPhone}</span>
             </div>
             <div className="flex items-center justify-between">
+              <span className="opacity-60">Home Address</span>
+              <span>{selected.kin_address}</span>
+            </div>
+
+            <h1>Emergency Contact</h1>
+
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Relationship</span>
+              <span>{selected.E_Relationship}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Name</span>
+              <span className="text-right">{selected.E_name}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Address</span>
+              <span className="text-right">{selected.E_address}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Phone Number</span>
+              <span>{selected.E_phone}</span>
+            </div>
+            <h1>Nysc kits</h1>
+            <div className="flex items-center justify-between">
               <span className="opacity-60">Shirt Size</span>
               <span>{selected.shirt}</span>
             </div>
 
-             <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <span className="opacity-60">Trouser Size</span>
               <span>{selected.trouser}</span>
-            </div> <div className="flex items-center justify-between">
+            </div>
+            <div className="flex items-center justify-between">
               <span className="opacity-60">Shoe Size</span>
               <span>{selected.shoe}</span>
             </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Cost</span>
+              <span>{selected.cost}</span>
+            </div>
 
 
-            
             <div className="pt-3 border-t border-brand-green/10">
               <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Documents</p>
               <div className="flex gap-2">
                 <div>
-                                                <h1 style={{
-                                                  fontSize:"14px"
-                                                }}>{selected.file.fileName}</h1>
-                             
-                                                  <button
-                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                onClick={() => handleDownload(baseUrl + selected.file.fileName, selected.file.fileName)}
-                                                  >
-                                                  download
-                                                 </button>
-      
-                                                                 
-                                                <h1 
-                                               style={{
-                                                  fontSize:"14px"
-                                                }}
-                                                >
-                         
-                                                  Statement of result
-                                                </h1>
-                                            </div>
-                       <div>
-                             <div>
-                                                <h1>{selected.file2.fileName}</h1>
-                             
-                                                  <button
-                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                onClick={() => handleDownload(baseUrl + selected.file2.fileName, selected.file2.fileName)}
-                                                  >
-                                                  download
-                                                 </button>
-      
-                                                                 
-                                                <h1 style={{
-                                             
-                                                }}>
-                                                  
-                                                  Signature
-                                                </h1>
-                                            </div>
-                                           
-                                            </div>
+                  <h1 style={{
+                    fontSize: "14px"
+                  }}>{selected.file.fileName}</h1>
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected.file.fileName, selected.file.fileName)}
+                  >
+                    download
+                  </button>
+
+
+                  <h1
+                    style={{
+                      fontSize: "14px"
+                    }}
+                  >
+
+                    Statement of result
+                  </h1>
+                </div>
+                <div>
+                  <div>
+                    <h1>{selected.file2.fileName}</h1>
+
+                    <button
+                      className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                      onClick={() => handleDownload(baseUrl + selected.file2.fileName, selected.file2.fileName)}
+                    >
+                      download
+                    </button>
+
+
+                    <h1 style={{
+
+                    }}>
+
+                      Signature
+                    </h1>
+                  </div>
+
+                </div>
                 {/* {STATUSES.map((s) => (
                   <button
                     key={s}
