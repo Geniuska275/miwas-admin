@@ -15,27 +15,27 @@ export default function Ngos() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
-  const baseUrl2="https://meganet-backend-q2fi.onrender.com/uploads/images/"
+  const baseUrl = "https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
+  const baseUrl2 = "https://meganet-backend-q2fi.onrender.com/uploads/images/"
 
-  
+
   useEffect(() => {
-    fetchdata()  
+    fetchdata()
     setServices(getServices());
   }, []);
-   const fetchdata=async()=>{
-     try {
-      const data= await axios.get("https://meganet-backend-q2fi.onrender.com/api/ngo")
-      console.log("data:",data?.data)
+  const fetchdata = async () => {
+    try {
+      const data = await axios.get("https://meganet-backend-q2fi.onrender.com/api/ngo")
+      console.log("data:", data?.data)
       setBookings(data?.data.data)
-     } catch (error) {
+    } catch (error) {
       console.log(error)
-     }
-   }
+    }
+  }
 
 
   const serviceById = useMemo(() => Object.fromEntries(services.map((s) => [s.id, s])), [services]);
-  console.log("bookings:",bookings.data)
+  console.log("bookings:", bookings.data)
   const filtered = useMemo(() => {
     return bookings
       .filter((b) => {
@@ -67,8 +67,8 @@ export default function Ngos() {
           placeholder="Search first choice or second choice"
           className="flex-1 min-w-[300px] px-4 py-2.5 rounded-lg bg-white outline-none text-sm border border-brand-green/20 focus:border-brand-green transition-colors"
         />
-       
-       
+
+
       </div>
 
       <div className="bg-white rounded-2xl border border-brand-green/10 overflow-hidden overflow-x-auto">
@@ -80,9 +80,8 @@ export default function Ngos() {
               <th className="px-5 py-3 font-semibold opacity-70">Third Choice</th>
               <th className="px-5 py-3 font-semibold opacity-70">Aim 1</th>
               <th className="px-5 py-3 font-semibold opacity-70">Aim 2</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Company Address</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Company does </th>
-              <th className="px-5 py-3 font-semibold opacity-70">Company Nature </th>
+              <th className="px-5 py-3 font-semibold opacity-70">Ngo  Address</th>
+
               <th className="px-5 py-3 font-semibold opacity-70">Dob </th>
               <th className="px-5 py-3 font-semibold opacity-70">Email Address </th>
 
@@ -103,17 +102,16 @@ export default function Ngos() {
                 <td>
                   <p className="text-xs opacity-50">{b.second_choice}</p>
                 </td>
-                 <td className="px-5 py-3.5 opacity-80">{b.third_choice}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.aim1}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.third_choice}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.aim1}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.aim2}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.company_address}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.company_does}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.company_nature}</td> 
-                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short" ,year:"numeric"})}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.Email_address}</td> 
-               
+                <td className="px-5 py-3.5 opacity-80">{b.ngo_address}</td>
 
-                
+                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.Email_address}</td>
+
+
+
                 <td className="px-5 py-3.5 text-right">
                   <button onClick={() => setSelected(b)} className="text-brand-green font-semibold text-xs hover:underline">
                     View
@@ -162,7 +160,7 @@ export default function Ngos() {
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Dob</span>
-              <span>{new Date(selected.d_dob).toLocaleDateString("en-NG", { day: "numeric", month: "short" ,year:"numeric"})}</span>
+              <span>{new Date(selected.d_dob).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Phone Number</span>
@@ -184,7 +182,7 @@ export default function Ngos() {
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Dob</span>
-              <span>{new Date(selected.s_dob).toLocaleDateString("en-NG", { day: "numeric", month: "short" ,year:"numeric"})}</span>
+              <span>{new Date(selected.s_dob).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Phone Number</span>
@@ -195,77 +193,77 @@ export default function Ngos() {
               <span>{selected.s_origin}</span>
             </div>
 
-              <div className="pt-3 border-t border-brand-green/10">
-                          <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Images</p>
-                          <div className="">
-                            <div style={{padding:"20px"}}>
-                                                       <img 
-                                                           style={{
-                                                            width:"80px",
-                                                            height:"80px",
-                                                            objectFit:"cover",
-                                                            marginBottom:"10px"
-                                                           }}
-                                                           src={baseUrl2 + selected.file.fileName} alt={selected.file.originalName} />
-                            
-                                                              <button
-                                                              className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                            onClick={() => handleDownload(baseUrl2 + selected.file.fileName, selected.file.fileName)}
-                                                              >
-                                                              download
-                                                             </button>                                                   
-                                                            <h1 style={{
-                                                              fontSize:"13px"
-                                                            }}>    
-                                                              Passport Photograph
-                                                            </h1>
-                                                        </div>
-                                                       
-                                                        <div style={{marginTop:"20px",padding:"20px"}}>
-                                                            <h1 style={{
-                                                              fontSize:"14px"
-                                                            }}>{selected.file2.fileName}</h1>
-            
-                                                          <button
-                                                              className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                            
-                                                           onClick={()=>{
-                                                            const src=baseUrl + selected.file2.fileName;
-                                                               console.log(src)
-                                                              downloadImage(src,selected.file2.originalName)
-                                                            }}>download</button>
-                                                            <h1 style={{
-                                                           
-                                                              fontSize:"13px"
-                                                            }}>
-                                                              
-                                                              Nin Slip
-                                                            </h1>
-                                                        </div>
-                                                        <div style={{marginTop:"20px",padding:"10px"}}>
-                                                             <h1 style={{
-                                                              fontSize:"14px"
-                                                            }}>{selected.file3.fileName}</h1>
-            
-                                                          <button
-                                                              className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                            
-                                                           onClick={()=>{
-                                                            const src=baseUrl + selected.file3.fileName;
-                                                               console.log(src)
-                                                              downloadImage(src,selected.file3.originalName)
-                                                            }}>download</button>
-                                                            <h1 style={{
-                                                              
-                                                              fontSize:"13px"
-                                                            }}>
-                                                              
-                                                              Signature
-                                                            </h1>
-                                                            </div>
-                          
-                          </div>
-                        </div>
+            <div className="pt-3 border-t border-brand-green/10">
+              <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Images</p>
+              <div className="">
+                <div style={{ padding: "20px" }}>
+                  <img
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      objectFit: "cover",
+                      marginBottom: "10px"
+                    }}
+                    src={baseUrl2 + selected.file.fileName} alt={selected.file.originalName} />
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl2 + selected.file.fileName, selected.file.fileName)}
+                  >
+                    download
+                  </button>
+                  <h1 style={{
+                    fontSize: "13px"
+                  }}>
+                    Passport Photograph
+                  </h1>
+                </div>
+
+                <div style={{ marginTop: "20px", padding: "20px" }}>
+                  <h1 style={{
+                    fontSize: "14px"
+                  }}>{selected.file2.fileName}</h1>
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+
+                    onClick={() => {
+                      const src = baseUrl + selected.file2.fileName;
+                      console.log(src)
+                      downloadImage(src, selected.file2.originalName)
+                    }}>download</button>
+                  <h1 style={{
+
+                    fontSize: "13px"
+                  }}>
+
+                    Nin Slip
+                  </h1>
+                </div>
+                <div style={{ marginTop: "20px", padding: "10px" }}>
+                  <h1 style={{
+                    fontSize: "14px"
+                  }}>{selected.file3.fileName}</h1>
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+
+                    onClick={() => {
+                      const src = baseUrl + selected.file3.fileName;
+                      console.log(src)
+                      downloadImage(src, selected.file3.originalName)
+                    }}>download</button>
+                  <h1 style={{
+
+                    fontSize: "13px"
+                  }}>
+
+                    Signature
+                  </h1>
+                </div>
+
+              </div>
+            </div>
 
           </div>
         </Modal>

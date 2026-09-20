@@ -255,20 +255,6 @@ export default function Bookings() {
                   </h1>
 
                 </div>
-                {/* {STATUSES.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => updateStatus(selected.id, s)}
-                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                    style={
-                      selected.status === s
-                        ? { backgroundColor: "#007518", color: "#fcfbfe", borderColor: "#007518" }
-                        : { borderColor: "#00751833", color: "#12200f" }
-                    }
-                  >
-                    {s}
-                  </button>
-                ))} */}
               </div>
             </div>
           </div>
