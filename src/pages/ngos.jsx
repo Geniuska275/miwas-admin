@@ -81,12 +81,7 @@ export default function Ngos() {
               <th className="px-5 py-3 font-semibold opacity-70">Aim 1</th>
               <th className="px-5 py-3 font-semibold opacity-70">Aim 2</th>
               <th className="px-5 py-3 font-semibold opacity-70">Ngo  Address</th>
-
-              <th className="px-5 py-3 font-semibold opacity-70">Dob </th>
-              <th className="px-5 py-3 font-semibold opacity-70">Email Address </th>
-
-
-
+              <th className="px-5 py-3 font-semibold opacity-70">Cost</th>
 
 
 
@@ -106,9 +101,9 @@ export default function Ngos() {
                 <td className="px-5 py-3.5 opacity-80">{b.aim1}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.aim2}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.ngo_address}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.cost}</td>
 
-                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.Email_address}</td>
+
 
 
 
@@ -130,14 +125,37 @@ export default function Ngos() {
 
       {selected && (
         <Modal title={selected.name} onClose={() => setSelected(null)}>
+          <h1 style={{
+            fontWeight: "bold",
+            textTransform: "uppercase",
+            marginBottom: "20px"
+          }}>Board of Trustees Details</h1>
+
+          <h1 style={{
+            fontWeight: "bold",
+          }}>Ist Board of Trustee (chairman)</h1>
           <div className="space-y-4 text-sm">
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Full Name</span>
+              <span className="font-semibold text-brand-green-dark">{selected.b_fullname}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Email Address</span>
+              <span className="font-semibold text-brand-green-dark">{selected.Email_address}</span>
+            </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Phone Number</span>
               <span className="font-semibold text-brand-green-dark">{selected.phone_number}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">Origin</span>
+              <span className="opacity-60"> State of Origin</span>
               <span className="font-semibold text-brand-green-dark">{selected.origin}</span>
+
+              {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60"> LGA of Origin</span>
+              <span className="font-semibold text-brand-green-dark">{selected.b_origin}</span>
 
               {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
             </div>
@@ -149,7 +167,14 @@ export default function Ngos() {
               <span className="opacity-60">Home Address</span>
               <span>{selected.home_address}</span>
             </div>
-            <h1>Director</h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Dob</span>
+              <span>{new Date(selected.dob).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</span>
+
+            </div>
+            <h1 style={{
+              fontWeight: "bold",
+            }}> Second Board of Trustee</h1>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Fullname</span>
               <span>{selected.d_fullname}</span>
@@ -167,11 +192,21 @@ export default function Ngos() {
               <span>{selected.d_phone_number}</span>
             </div>
             <div className="flex items-center justify-between">
+              <span className="opacity-60">Card Number</span>
+              <span>{selected.d_card_number}</span>
+            </div>
+            <div className="flex items-center justify-between">
               <span className="opacity-60">State of Origin</span>
               <span>{selected.d_origin}</span>
             </div>
-            <h1>Secretary</h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">LGA of Origin</span>
+              <span>{selected.l_origin}</span>
+            </div>
 
+            <h1 style={{
+              fontWeight: "bold",
+            }}> Secretary Details</h1>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Fullname</span>
               <span>{selected.s_fullname}</span>
@@ -192,11 +227,26 @@ export default function Ngos() {
               <span className="opacity-60">State of Origin</span>
               <span>{selected.s_origin}</span>
             </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">LGA of Origin</span>
+              <span>{selected.s_l_origin}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Card Number</span>
+              <span>{selected.s_card_number}</span>
+            </div>
 
             <div className="pt-3 border-t border-brand-green/10">
               <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Images</p>
               <div className="">
-                <div style={{ padding: "20px" }}>
+                <div >
+                  <h1 style={{
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    marginBottom: "10px"
+                  }}>
+                    Passport Photograph
+                  </h1>
                   <img
                     style={{
                       width: "80px",
@@ -212,17 +262,28 @@ export default function Ngos() {
                   >
                     download
                   </button>
-                  <h1 style={{
-                    fontSize: "13px"
-                  }}>
-                    Passport Photograph
-                  </h1>
                 </div>
 
-                <div style={{ marginTop: "20px", padding: "20px" }}>
+                <div style={{ marginTop: "20px" }}>
+
                   <h1 style={{
-                    fontSize: "14px"
-                  }}>{selected.file2.fileName}</h1>
+
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    marginBottom: "10px"
+                  }}>
+
+                    Nin Slip
+                  </h1>
+                  <img
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      objectFit: "cover",
+                      marginBottom: "10px"
+                    }}
+                    src={baseUrl2 + selected.file2.fileName} alt={selected.file2.originalName} />
+
 
                   <button
                     className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
@@ -232,18 +293,28 @@ export default function Ngos() {
                       console.log(src)
                       downloadImage(src, selected.file2.originalName)
                     }}>download</button>
+                </div>
+                <div style={{ marginTop: "20px" }}>
                   <h1 style={{
 
-                    fontSize: "13px"
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    marginBottom: "10px"
+
                   }}>
 
-                    Nin Slip
+                    Signature
                   </h1>
-                </div>
-                <div style={{ marginTop: "20px", padding: "10px" }}>
-                  <h1 style={{
-                    fontSize: "14px"
-                  }}>{selected.file3.fileName}</h1>
+                  <img
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      objectFit: "cover",
+                      marginBottom: "10px"
+                    }}
+                    src={baseUrl2 + selected.file3.fileName} alt={selected.file3.originalName} />
+
+
 
                   <button
                     className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
@@ -253,13 +324,6 @@ export default function Ngos() {
                       console.log(src)
                       downloadImage(src, selected.file3.originalName)
                     }}>download</button>
-                  <h1 style={{
-
-                    fontSize: "13px"
-                  }}>
-
-                    Signature
-                  </h1>
                 </div>
 
               </div>

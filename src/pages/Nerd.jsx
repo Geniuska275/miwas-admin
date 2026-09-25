@@ -78,15 +78,11 @@ export default function Nerd() {
             <tr className="text-left border-b border-brand-green/10 bg-brand-cream">
               <th className="px-5 py-3 font-semibold opacity-70">First Name</th>
               <th className="px-5 py-3 font-semibold opacity-70">Middlename</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Course</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Department</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Surname</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Sex</th>
               <th className="px-5 py-3 font-semibold opacity-70">Dob</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Email Address</th>
-              <th className="px-5 py-3 font-semibold opacity-70">nationality </th>
               <th className="px-5 py-3 font-semibold opacity-70">MaritalStatus </th>
-              <th className="px-5 py-3 font-semibold opacity-70">MatricNumber </th>
-              <th className="px-5 py-3 font-semibold opacity-70">Local Origin </th>
-              <th className="px-5 py-3 font-semibold opacity-70">Phone Number </th>
+              <th className="px-5 py-3 font-semibold opacity-70">NIN </th>
               <th className="px-5 py-3"></th>
             </tr>
           </thead>
@@ -99,15 +95,12 @@ export default function Nerd() {
                 <td>
                   <p className="text-xs opacity-50">{b.middlename}</p>
                 </td>
-                <td className="px-5 py-3.5 opacity-80">{b.Course}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.Department}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.surname}</td>
+                <td className="px-5 py-3.5 opacity-80"></td>
                 <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.Email_address}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.nationality}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.MaritalStatus}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.MatricNumber}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.Lga}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.Phone}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.nin}</td>
+
 
 
                 <td className="px-5 py-3.5 text-right">
@@ -128,45 +121,107 @@ export default function Nerd() {
 
       {selected && (
         <Modal title={selected.name} onClose={() => setSelected(null)}>
+          <h1 style={{
+            fontWeight: "bold"
+          }}>CONTACT INFORMATION</h1>
           <div className="space-y-4 text-sm">
             <div className="flex items-center justify-between">
-              <span className="opacity-60">Fullname</span>
-              <span className="font-semibold text-brand-green-dark">{selected.FullName}</span>
+              <span className="opacity-60">Nationality</span>
+              <span className="font-semibold text-brand-green-dark">{selected.nationality}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">Phone Number</span>
-              <span className="font-semibold text-brand-green-dark">{selected.PhoneNumber}</span>
+              <span className="opacity-60">State of Origin</span>
+              <span className="font-semibold text-brand-green-dark">{selected.State}</span>
 
               {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">State</span>
-              <span>{selected.State}</span>
+              <span className="opacity-60">LGA</span>
+              <span>{selected.Lga}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">Home address</span>
+              <span className="opacity-60">City</span>
+              <span>{selected.city}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Residential Address</span>
               <span>{selected.address}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Email Address</span>
+              <span className="text-right">{selected.Email_address}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Phone Number</span>
+              <span>{selected.PhoneNumber}</span>
+            </div>
+
+            <hr></hr>
+            <h1 style={{
+              fontWeight: "bold"
+            }}>NEXT OF KIN</h1>
+
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Full Name</span>
+              <span>{selected.FullName}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Phone Number</span>
+              <span>{selected.Phone}</span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Email Address</span>
+              <span></span>
+            </div>
+
+
+
+            <hr></hr>
+            <h1 style={{
+              fontWeight: "bold"
+            }}>ACADEMIC DATA</h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Institution</span>
+              <span>{selected?.institution}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Faculty</span>
               <span>{selected.faculty}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">City</span>
-              <span className="text-right">{selected.city}</span>
+              <span className="opacity-60">Department</span>
+              <span>{selected?.department}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">Origin</span>
-              <span>{selected.origin}</span>
+              <span className="opacity-60">Programme Type</span>
+              <span>{selected.programmeType}</span>
             </div>
-
-
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Matriculation Number</span>
+              <span>{selected.MatricNumber}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Course of Study</span>
+              <span>{selected.Course}</span>
+            </div>
             <div className="pt-3 border-t border-brand-green/10">
-              <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download documents</p>
+              <p style={{
+                fontSize: "14px",
+                fontWeight: "bold",
+                textTransform: "uppercase"
+              }}>Download documents</p>
               <div className="">
-                <div>
+                <h1 style={{
+                  fontSize: "14px",
+                  marginBottom: "10px",
+                  marginTop: "10px",
+                  fontWeight: "bold"
 
-                </div>
+                }}>
+                  Passport Photograph
+                </h1>
+
                 <img
                   style={{
                     width: "80px",
@@ -177,45 +232,33 @@ export default function Nerd() {
                   src={baseUrl2 + selected.file.fileName} alt={selected.file.originalName} />
 
                 <button
-                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                  className="flex-1 px-3 py-2 mb-2 rounded-full text-xs font-semibold border transition-colors"
                   onClick={() => handleDownload(baseUrl2 + selected.file.fileName, selected.file.fileName)}
                 >
                   download
                 </button>
+                <hr></hr>
 
                 <div>
 
-                  <h1>{selected.file2.fileName}</h1>
-
-                  <button
-                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                    onClick={() => handleDownload(baseUrl + selected.file2.fileName, selected.file2.fileName)}
-                  >
-                    download
-                  </button>
-
-
                   <h1 style={{
-
                     fontSize: "13px",
                     fontWeight: "bold"
-
                   }}>
 
                     NIN SLIP OR CARD
                   </h1>
-                </div>
-                <div>
-                  <h1>{selected.file3.fileName}</h1>
+                  <h1>{selected.file2.fileName}</h1>
 
                   <button
-                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                    onClick={() => handleDownload(baseUrl + selected.file3.fileName, selected.file3.fileName)}
+                    className="flex-1 px-3 py-2 mb-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected.file2.fileName, selected.file2.fileName)}
                   >
                     download
                   </button>
-
-
+                </div>
+                <hr></hr>
+                <div>
                   <h1 style={{
 
                     fontSize: "13px",
@@ -225,18 +268,19 @@ export default function Nerd() {
 
                     STATEMENT OF RESULT
                   </h1>
-                </div>
-                <div>
-                  <h1>{selected?.file4?.fileName}</h1>
+                  <h1>{selected.file3.fileName}</h1>
 
                   <button
-                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                    onClick={() => handleDownload(baseUrl + selected?.file4?.fileName, selected?.file4?.fileName)}
+                    className="flex-1 px-3 py-2 mb-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected.file3.fileName, selected.file3.fileName)}
                   >
                     download
                   </button>
 
 
+                </div>
+                <hr></hr>
+                <div>
                   <h1 style={{
 
                     fontSize: "13px",
@@ -246,18 +290,20 @@ export default function Nerd() {
 
                     PROJECT SOFT COPY PDF/DOC
                   </h1>
-                </div>
-
-                <div>
-                  <h1>{selected?.file5?.fileName}</h1>
+                  <h1>{selected?.file4?.fileName}</h1>
 
                   <button
-                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                    onClick={() => handleDownload(baseUrl + selected?.file5?.fileName, selected?.file5?.fileName)}
+                    className="flex-1 px-3 py-2 mb-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected?.file4?.fileName, selected?.file4?.fileName)}
                   >
                     download
                   </button>
 
+
+                </div>
+                <hr></hr>
+
+                <div>
 
                   <h1 style={{
 
@@ -267,6 +313,15 @@ export default function Nerd() {
 
                     SIGNED PROJECT CERTIFICATE PAGE
                   </h1>
+                  <h1>{selected?.file5?.fileName}</h1>
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected?.file5?.fileName, selected?.file5?.fileName)}
+                  >
+                    download
+                  </button>
+
                 </div>
               </div>
             </div>

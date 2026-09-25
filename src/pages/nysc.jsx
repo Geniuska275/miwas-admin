@@ -16,6 +16,7 @@ export default function Nysc() {
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
   const baseUrl = "https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
+  const baseUrl2 = "https://meganet-backend-q2fi.onrender.com/uploads/images/"
 
   useEffect(() => {
     fetchdata()
@@ -33,7 +34,7 @@ export default function Nysc() {
 
 
   const serviceById = useMemo(() => Object.fromEntries(services.map((s) => [s.id, s])), [services]);
-  console.log("bookings:", bookings.data)
+
   const filtered = useMemo(() => {
     return bookings
       .filter((b) => {
@@ -121,6 +122,9 @@ export default function Nysc() {
 
       {selected && (
         <Modal title={"NYSC REGISTRATION"} onClose={() => setSelected(null)}>
+          <h1 style={{
+            fontWeight: "bold"
+          }}>PERSONAL DATA</h1>
           <div className="space-y-4 text-sm">
             <div className="flex items-center justify-between">
               <span className="opacity-60">Registration Number</span>
@@ -140,7 +144,13 @@ export default function Nysc() {
               <span className="opacity-60">Language</span>
               <span>{selected.language}</span>
             </div>
-            <h1>Primary School</h1>
+            <h1 style={{
+              fontWeight: "bold"
+            }}>EDUCATIONAL DATA</h1>
+            <h1 style={{
+              fontWeight: "bold"
+
+            }}>Primary School info</h1>
             <div className="flex items-center justify-between">
               <span className="opacity-60">School name</span>
               <span className="text-right">{selected.pschname}</span>
@@ -153,7 +163,10 @@ export default function Nysc() {
               <span className="opacity-60">To</span>
               <span className="text-right">{selected.prito}</span>
             </div>
-            <h1>Secondary School</h1>
+            <h1 style={{
+              fontWeight: "bold"
+
+            }}>Secondary School info</h1>
             <div className="flex items-center justify-between">
               <span className="opacity-60">School name</span>
               <span className="text-right">{selected.sschname}</span>
@@ -166,7 +179,10 @@ export default function Nysc() {
               <span className="opacity-60">To</span>
               <span>{selected.secto}</span>
             </div>
-            <h1>Tertiary</h1>
+            <h1 style={{
+              fontWeight: "bold"
+
+            }}>Tertiary info</h1>
             <div className="flex items-center justify-between">
               <span className="opacity-60">School name</span>
               <span className="text-right">{selected.tschname}</span>
@@ -180,7 +196,10 @@ export default function Nysc() {
               <span className="text-right">{selected.tetto}</span>
             </div>
 
-            <h1>next of kin</h1>
+            <h1 style={{
+              fontWeight: "bold"
+
+            }}>NEXT OF KIN DETAILS</h1>
 
             <div className="flex items-center justify-between">
               <span className="opacity-60">Relationship</span>
@@ -200,7 +219,10 @@ export default function Nysc() {
               <span>{selected.kin_address}</span>
             </div>
 
-            <h1>Emergency Contact</h1>
+            <h1 style={{
+              fontWeight: "bold",
+              textTransform: "uppercase"
+            }}>Emergency Contact</h1>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Relationship</span>
               <span>{selected.E_Relationship}</span>
@@ -217,7 +239,10 @@ export default function Nysc() {
               <span className="opacity-60">Phone Number</span>
               <span>{selected.E_phone}</span>
             </div>
-            <h1>Nysc kits</h1>
+            <h1 style={{
+              fontWeight: "bold",
+              textTransform: "uppercase"
+            }}>Nysc kits</h1>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Shirt Size</span>
               <span>{selected.shirt}</span>
@@ -231,6 +256,7 @@ export default function Nysc() {
               <span className="opacity-60">Shoe Size</span>
               <span>{selected.shoe}</span>
             </div>
+            <hr></hr>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Cost</span>
               <span>{selected.cost}</span>
@@ -238,11 +264,27 @@ export default function Nysc() {
 
 
             <div className="pt-3 border-t border-brand-green/10">
-              <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Documents</p>
-              <div className="flex gap-2">
+              <p style={{
+                fontWeight: "bold",
+                textTransform: "uppercase"
+              }}>Download Documents</p>
+              <div style={{
+                padding: "10px"
+              }}>
+                <h1
+                  style={{
+                    fontSize: "14px",
+                    marginBottom: "10px"
+                  }}
+                >
+
+                  Statement of result
+                </h1>
                 <div>
                   <h1 style={{
-                    fontSize: "14px"
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                    marginBottom: "10px"
                   }}>{selected.file.fileName}</h1>
 
                   <button
@@ -252,19 +294,26 @@ export default function Nysc() {
                     download
                   </button>
 
-
-                  <h1
-                    style={{
-                      fontSize: "14px"
-                    }}
-                  >
-
-                    Statement of result
-                  </h1>
                 </div>
                 <div>
+                  <h1 style={{
+                    fontSize: "14px",
+                    marginBottom: "10px",
+                    marginTop: "10px"
+
+                  }}>
+
+                    Signature
+                  </h1>
                   <div>
-                    <h1>{selected.file2.fileName}</h1>
+                    <img
+                      style={{
+                        width: "80px",
+                        height: "80px",
+                        objectFit: "cover",
+                        marginBottom: "10px"
+                      }}
+                      src={baseUrl2 + selected.file2.fileName} alt={selected.file2.originalName} />
 
                     <button
                       className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
@@ -274,12 +323,6 @@ export default function Nysc() {
                     </button>
 
 
-                    <h1 style={{
-
-                    }}>
-
-                      Signature
-                    </h1>
                   </div>
 
                 </div>

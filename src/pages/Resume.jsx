@@ -15,30 +15,30 @@ export default function Resume() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const baseUrl="https://meganet-backend-q2fi.onrender.com/api/personal"
+  const baseUrl = "https://meganet-backend-q2fi.onrender.com/api/personal"
   useEffect(() => {
-    fetchdata()  
+    fetchdata()
     setServices(getServices());
   }, []);
-   const fetchdata=async()=>{
-     try {
-      const data= await axios.get("https://meganet-backend-q2fi.onrender.com/api/resume")
-      console.log("data:",data?.data)
+  const fetchdata = async () => {
+    try {
+      const data = await axios.get("https://meganet-backend-q2fi.onrender.com/api/resume")
+      console.log("data:", data?.data)
       setBookings(data?.data.data)
-     } catch (error) {
+    } catch (error) {
       console.log(error)
-     }
-   }
+    }
+  }
 
 
   const serviceById = useMemo(() => Object.fromEntries(services.map((s) => [s.id, s])), [services]);
-  console.log("bookings:",bookings.data)
+  console.log("bookings:", bookings.data)
   const filtered = useMemo(() => {
     return bookings
       .filter((b) => {
         const q = search.trim().toLowerCase();
         if (!q) return true;
-        return b.fullname.toLowerCase().includes(q) ;
+        return b.fullname.toLowerCase().includes(q);
       })
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   }, [bookings, search]);
@@ -64,8 +64,8 @@ export default function Resume() {
           placeholder="Search first choice or second choice"
           className="flex-1 min-w-[300px] px-4 py-2.5 rounded-lg bg-white outline-none text-sm border border-brand-green/20 focus:border-brand-green transition-colors"
         />
-       
-       
+
+
       </div>
 
       <div className="bg-white rounded-2xl border border-brand-green/10 overflow-hidden overflow-x-auto">
@@ -79,10 +79,11 @@ export default function Resume() {
               <th className="px-5 py-3 font-semibold opacity-70">State Of Origin</th>
               <th className="px-5 py-3 font-semibold opacity-70">Phone Number</th>
               <th className="px-5 py-3 font-semibold opacity-70">Email Address</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Card Number</th>
+
               <th className="px-5 py-3 font-semibold opacity-70">Home Address</th>
               <th className="px-5 py-3 font-semibold opacity-70">Hobby</th>
-              
+              <th className="px-5 py-3 font-semibold opacity-70">Cost</th>
+
 
               <th className="px-5 py-3"></th>
             </tr>
@@ -98,15 +99,15 @@ export default function Resume() {
                 <td>
                   <p className="text-xs opacity-50">{b.gender}</p>
                 </td>
-                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short",year:"numeric" })}</td>
+                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</td>
 
-                 <td className="px-5 py-3.5 opacity-80">{b.l_origin}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.origin}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.l_origin}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.origin}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.phone_number}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.email_address}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.card_number}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.hobby}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.email_address}</td>  
+                <td className="px-5 py-3.5 opacity-80">{b.email_address}</td>
+
+                <td className="px-5 py-3.5 opacity-80">{b.hobby}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.cost}</td>
                 <td className="px-5 py-3.5 text-right">
                   <button onClick={() => setSelected(b)} className="text-brand-green font-semibold text-xs hover:underline">
                     View
@@ -130,6 +131,17 @@ export default function Resume() {
               <span className="opacity-60">Spoken</span>
               <span className="font-semibold text-brand-green-dark">{selected.spoken}</span>
             </div>
+            <h1 style={{
+              fontWeight: "bold"
+            }}>PRIMARY SCHOOL DETAILS</h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">School Name</span>
+              <span className="font-semibold text-brand-green-dark">{selected.primary}</span>
+
+              {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
+            </div>
+
+
             <div className="flex items-center justify-between">
               <span className="opacity-60">From</span>
               <span className="font-semibold text-brand-green-dark">{selected.pfrom}</span>
@@ -137,60 +149,87 @@ export default function Resume() {
               {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">TO</span>
+              <span className="opacity-60">To</span>
               <span>{selected.pto}</span>
             </div>
-            <h1>SECONDARY</h1>
+            <h1 style={{
+              fontWeight: "bold"
+            }}>SECONDARY SCHOOL DETAILS</h1>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">FROM</span>
+              <span className="opacity-60">School Name</span>
+              <span className="font-semibold text-brand-green-dark">{selected.secondary}</span>
+
+              {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">From</span>
               <span>{selected.sfrom}</span>
             </div>
-            <h1>Director</h1>
+
             <div className="flex items-center justify-between">
-              <span className="opacity-60">TO</span>
+              <span className="opacity-60">To</span>
               <span>{selected.sto}</span>
             </div>
-            <h1>Tertiary </h1>
+
+            <div className="flex items-center justify-between">
+              <span className="opacity-60 text-bold">QUALIFICATION</span>
+              <span>{selected.qualification}</span>
+            </div>
+
+            <h1 style={{
+              fontWeight: "bold"
+            }}>TERTIARY SCHOOL DETAILS</h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">School Name</span>
+              <span className="font-semibold text-brand-green-dark">{selected.tertiary}</span>
+
+              {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
+            </div>
+
             <div className="flex items-center justify-between">
               <span className="opacity-60">FROM</span>
               <span className="text-right">{selected.tfrom}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">TO</span>
-              <span>{selected.tto}</span>    
+              <span>{selected.tto}</span>
             </div>
 
-             <div className="flex items-center justify-between">
-              <span className="opacity-60">Qualification</span>
-              <span>{selected.qualification}</span>    
+            <div className="flex items-center justify-between">
+              <span className="opacity-60 text-bold">QUALIFICATION</span>
+              <span>{selected.tqualification}</span>
             </div>
 
-             <div className="flex items-center justify-between">
-              <span className="opacity-60">Tertiary Qualification</span>
-              <span>{selected.tqualification}</span>    
-            </div>
+            <h1 style={{
+              fontWeight: "bold"
+            }}>EMPLOYMENT RECORDS/WORK EXPERIENCE</h1>
 
-             <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <span className="opacity-60">Company</span>
-              <span>{selected.company}</span>    
+              <span>{selected.company}</span>
             </div>
-             <div className="flex items-center justify-between">
-              <span className="opacity-60">POST</span>
-              <span>{selected.post}</span>    
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Post Held</span>
+              <span>{selected.post}</span>
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="opacity-60">POST</span>
-              <span>{selected.to}</span>    
+              <span className="opacity-60">From</span>
+              <span>{selected.te}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="opacity-60">POST</span>
-              <span>{selected.te}</span>    
+              <span className="opacity-60">To</span>
+              <span>{selected.to}</span>
             </div>
-          
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Responsibilities</span>
+              <span>{selected.responsibilities}</span>
+            </div>
 
-            
-           
+
+
+
+
           </div>
         </Modal>
       )}
