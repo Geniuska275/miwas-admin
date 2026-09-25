@@ -105,6 +105,9 @@ export default function Resume() {
                 <td className="px-5 py-3.5 opacity-80">{b.origin}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.phone_number}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.email_address}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.home_address}</td>
+
+
 
                 <td className="px-5 py-3.5 opacity-80">{b.hobby}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.cost}</td>
