@@ -58,7 +58,7 @@ export default function Nerd() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="font-display text-2xl font-semibold text-brand-green-dark">Nerd</h1>
+        <h1 className="font-display text-2xl font-semibold text-brand-green-dark">NERD REGISTRATION</h1>
         <p className="text-sm opacity-60 mt-1">{filtered.length} of {bookings.length} Nerd</p>
       </div>
 
@@ -112,7 +112,7 @@ export default function Nerd() {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-5 py-10 text-center opacity-50">No bookings match your filters.</td>
+                <td colSpan={6} className="px-5 py-10 text-center opacity-50">loading...</td>
               </tr>
             )}
           </tbody>

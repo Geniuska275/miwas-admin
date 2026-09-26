@@ -120,7 +120,7 @@ export default function Resume() {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-5 py-10 text-center opacity-50">No bookings match your filters.</td>
+                <td colSpan={6} className="px-5 py-10 text-center opacity-50">loading...</td>
               </tr>
             )}
           </tbody>
@@ -155,6 +155,7 @@ export default function Resume() {
               <span className="opacity-60">To</span>
               <span>{selected.pto}</span>
             </div>
+            <hr></hr>
             <h1 style={{
               fontWeight: "bold"
             }}>SECONDARY SCHOOL DETAILS</h1>
@@ -178,6 +179,7 @@ export default function Resume() {
               <span className="opacity-60 text-bold">QUALIFICATION</span>
               <span>{selected.qualification}</span>
             </div>
+            <hr></hr>
 
             <h1 style={{
               fontWeight: "bold"
@@ -202,6 +204,7 @@ export default function Resume() {
               <span className="opacity-60 text-bold">QUALIFICATION</span>
               <span>{selected.tqualification}</span>
             </div>
+            <hr></hr>
 
             <h1 style={{
               fontWeight: "bold"

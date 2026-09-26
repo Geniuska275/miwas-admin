@@ -17,30 +17,30 @@ export default function Personal() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [serviceFilter, setServiceFilter] = useState("All");
   const [selected, setSelected] = useState(null);
-  const baseUrl="https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
+  const baseUrl = "https://meganet-backend-q2fi.onrender.com/uploads/pdfs/"
   useEffect(() => {
-    fetchdata()  
+    fetchdata()
     setServices(getServices());
   }, []);
-   const fetchdata=async()=>{
-     try {
-      const data= await axios.get("https://meganet-backend-q2fi.onrender.com/api/personal")
-      console.log("data:",data?.data)
+  const fetchdata = async () => {
+    try {
+      const data = await axios.get("https://meganet-backend-q2fi.onrender.com/api/personal")
+      console.log("data:", data?.data)
       setBookings(data?.data.data)
-     } catch (error) {
+    } catch (error) {
       console.log(error)
-     }
-   }
+    }
+  }
 
 
   const serviceById = useMemo(() => Object.fromEntries(services.map((s) => [s.id, s])), [services]);
-  console.log("bookings:",bookings.data)
+  console.log("bookings:", bookings.data)
   const filtered = useMemo(() => {
     return bookings
       .filter((b) => {
         const q = search.trim().toLowerCase();
         if (!q) return true;
-        return b.fullname.toLowerCase().includes(q) ;
+        return b.fullname.toLowerCase().includes(q);
       })
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   }, [bookings, search]);
@@ -66,8 +66,8 @@ export default function Personal() {
           placeholder="Search first choice or second choice"
           className="flex-1 min-w-[300px] px-4 py-2.5 rounded-lg bg-white outline-none text-sm border border-brand-green/20 focus:border-brand-green transition-colors"
         />
-       
-       
+
+
       </div>
 
       <div className="bg-white rounded-2xl border border-brand-green/10 overflow-hidden overflow-x-auto">
@@ -96,14 +96,14 @@ export default function Personal() {
                 <td>
                   <p className="text-xs opacity-50">{b.Email_address}</p>
                 </td>
-                 <td className="px-5 py-3.5 opacity-80">{b.phone_number}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.institution}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.phone_number}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.institution}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.study}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.destination}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.website}</td> 
-                <td className="px-5 py-3.5 opacity-80">{b.cost}</td> 
+                <td className="px-5 py-3.5 opacity-80">{b.destination}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.website}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.cost}</td>
 
-                
+
                 <td className="px-5 py-3.5 text-right">
                   <button onClick={() => setSelected(b)} className="text-brand-green font-semibold text-xs hover:underline">
                     View
@@ -113,7 +113,7 @@ export default function Personal() {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-5 py-10 text-center opacity-50">No bookings match your filters.</td>
+                <td colSpan={6} className="px-5 py-10 text-center opacity-50">loading...</td>
               </tr>
             )}
           </tbody>
@@ -141,7 +141,7 @@ export default function Personal() {
               <span className="opacity-60">Institution</span>
               <span>{selected.institution}</span>
             </div>
-            <h1>Director</h1>
+
             <div className="flex items-center justify-between">
               <span className="opacity-60">Study</span>
               <span>{selected.study}</span>
@@ -152,37 +152,37 @@ export default function Personal() {
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Website</span>
-              <span>{selected.website}</span>    
+              <span>{selected.website}</span>
             </div>
-          
 
-            
+
+
             <div className="pt-3 border-t border-brand-green/10">
               <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download PDF</p>
               <div className="flex gap-2">
-                                             <div>
-                                                <h1>{selected.file.fileName}</h1>
-                             
-                                                  <button
-                                                  className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-                                                onClick={() => handleDownload(baseUrl + selected.file.fileName, selected.file.fileName)}
-                                                  >
-                                                  download
-                                                 </button>
-      
-                                                                 
-                                                <h1 style={{
-                                                  textAlign:"center",
-                                                  fontSize:"13px"
-                                                }}>
-                                                  
-                                                  Signature
-                                                </h1>
-                                            </div>
-                
+                <div>
+                  <h1 style={{
+                    fontWeight: "bold",
+                    fontSize: "13px"
+                  }}>
+
+                    CV/Resume
+                  </h1>
+                  <h1>{selected.file.fileName}</h1>
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected.file.fileName, selected.file.fileName)}
+                  >
+                    download
+                  </button>
+
+
+                </div>
+
               </div>
             </div>
-            
+
           </div>
         </Modal>
       )}

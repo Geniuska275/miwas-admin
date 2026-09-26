@@ -58,7 +58,7 @@ export default function Bookings() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="font-display text-2xl font-semibold text-brand-green-dark">Business</h1>
+        <h1 className="font-display text-2xl font-semibold text-brand-green-dark">CAC REGISTRATION (Business Name)</h1>
         <p className="text-sm opacity-60 mt-1">{filtered.length} of {bookings.length} business</p>
       </div>
 
@@ -124,7 +124,7 @@ export default function Bookings() {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-5 py-10 text-center opacity-50">No bookings match your filters.</td>
+                <td colSpan={6} className="px-5 py-10 text-center opacity-50">loading...</td>
               </tr>
             )}
           </tbody>
@@ -133,21 +133,10 @@ export default function Bookings() {
 
       {selected && (
         <Modal title={selected.name} onClose={() => setSelected(null)}>
+          <h1 style={{
+            fontWeight: "bold"
+          }}>BUSINESS NAME REGISTRATION</h1>
           <div className="space-y-4 text-sm">
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">First_Choice</span>
-              <span className="font-semibold text-brand-green-dark">{selected.first_choice}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">Second_Choice</span>
-              <span className="font-semibold text-brand-green-dark">{selected.second_choice}</span>
-
-              {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">Business Address</span>
-              <span>{selected.business_address}</span>
-            </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">fullname</span>
               <span>{selected.fullname}</span>
@@ -156,13 +145,11 @@ export default function Bookings() {
               <span className="opacity-60">email</span>
               <span>{selected.Email_address}</span>
             </div>
-            <div className="flex items-center justify-between">
-              <span className="opacity-60">Company Nature</span>
-              <span>{selected.company_nature}</span>
-            </div>
+
             <div className="flex items-center justify-between">
               <span className="opacity-60">Dob</span>
-              <span>{selected.dob}</span>
+              <span>{new Date(selected.dob).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</span>
+
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">phone_number</span>
@@ -183,13 +170,46 @@ export default function Bookings() {
             <div className="flex items-center justify-between">
               <span className="opacity-60">Local Govt Origin</span>
               <span className="font-mono text-xs">{selected.l_origin}</span>
+
+            </div>
+            <h1 style={{
+              fontWeight: "bold",
+            }}>BUSINESS NAME</h1>
+
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">First_Choice</span>
+              <span className="font-semibold text-brand-green-dark">{selected.first_choice}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Second_Choice</span>
+              <span className="font-semibold text-brand-green-dark">{selected.second_choice}</span>
+
+              {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Nature of Business</span>
+              <span>{selected.company_nature}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Business Address</span>
+              <span>{selected.business_address}</span>
             </div>
 
             <div className="pt-3 border-t border-brand-green/10">
               <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Images</p>
-              <div className="flex gap-2">
+              <div >
 
                 <div>
+
+                  <h1 style={{
+
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    marginBottom: "10px"
+                  }}>
+
+                    Passport Photograph
+                  </h1>
                   <img
                     style={{
                       width: "80px",
@@ -206,17 +226,25 @@ export default function Bookings() {
                     download
                   </button>
 
-
-                  <h1 style={{
-
-                    fontSize: "13px"
-                  }}>
-
-                    Passport Photograph
-                  </h1>
                 </div>
                 <div>
-                  <h1>{selected.file2.fileName}</h1>
+                  <h1 style={{
+
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    marginBottom: "10px"
+                  }}>
+
+                    Nin Slip
+                  </h1>
+                  <img
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      objectFit: "cover",
+                      marginBottom: "10px"
+                    }}
+                    src={baseUrl2 + selected.file2.fileName} alt={selected.file2.originalName} />
 
                   <button
                     className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
@@ -227,16 +255,26 @@ export default function Bookings() {
 
 
 
-                  <h1 style={{
-
-                    fontSize: "13px"
-                  }}>
-
-                    Nin Slip
-                  </h1>
                 </div>
                 <div>
-                  <h1>{selected.file3.fileName}</h1>
+                  <h1 style={{
+
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    marginBottom: "10px"
+                  }}>
+
+                    Signature
+                  </h1>
+                  <img
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      objectFit: "cover",
+                      marginBottom: "10px"
+                    }}
+                    src={baseUrl2 + selected.file3.fileName} alt={selected.file3.originalName} />
+
 
                   <button
                     className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
@@ -244,15 +282,6 @@ export default function Bookings() {
                   >
                     download
                   </button>
-
-
-                  <h1 style={{
-
-                    fontSize: "13px"
-                  }}>
-
-                    Signature
-                  </h1>
 
                 </div>
               </div>

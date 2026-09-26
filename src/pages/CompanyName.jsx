@@ -57,7 +57,7 @@ export default function CompanyName() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="font-display text-2xl font-semibold text-brand-green-dark">Company Name</h1>
+        <h1 className="font-display text-2xl font-semibold text-brand-green-dark">CAC REGISTRATION (Company Name)</h1>
         <p className="text-sm opacity-60 mt-1">{filtered.length} of {bookings.length} Company</p>
       </div>
 
@@ -83,9 +83,11 @@ export default function CompanyName() {
               <th className="px-5 py-3 font-semibold opacity-70">Company Does</th>
               <th className="px-5 py-3 font-semibold opacity-70">Company Nature</th>
               <th className="px-5 py-3 font-semibold opacity-70">DOB</th>
-              <th className="px-5 py-3 font-semibold opacity-70">Address </th>
+
               <th className="px-5 py-3 font-semibold opacity-70">Phone Number</th>
               <th className="px-5 py-3 font-semibold opacity-70">Origin</th>
+              <th className="px-5 py-3 font-semibold opacity-70">Cost</th>
+
               <th className="px-5 py-3"></th>
             </tr>
           </thead>
@@ -97,13 +99,15 @@ export default function CompanyName() {
                 </td>
                 <td className="px-5 py-3.5 opacity-80">{b.second_choice}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.Email_address}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.company_address}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.business_address}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.company_does}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.company_nature}</td>
                 <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</td>
-                <td className="px-5 py-3.5 opacity-80">{b.address}</td>
+
                 <td className="px-5 py-3.5 opacity-80">{b.phone_number}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.origin}</td>
+                <td className="px-5 py-3.5 opacity-80">{b.cost}</td>
+
 
                 <td className="px-5 py-3.5 text-right">
                   <button onClick={() => setSelected(b)} className="text-brand-green font-semibold text-xs hover:underline">
@@ -114,7 +118,7 @@ export default function CompanyName() {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-5 py-10 text-center opacity-50">No bookings match your filters.</td>
+                <td colSpan={6} className="px-5 py-10 text-center opacity-50">loading...</td>
               </tr>
             )}
           </tbody>
@@ -134,14 +138,16 @@ export default function CompanyName() {
 
               {/* <span className="font-semibold text-brand-green-dark">{naira(serviceById[selected.serviceId]?.price)}</span> */}
             </div>
-            <h1>Director Details</h1>
+            <h1 style={{
+              fontWeight: "bold"
+            }}> 1st Director Details</h1>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Full Name</span>
-              <span>{selected.d_fullname}</span>
+              <span>{selected.fullname}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Email Address</span>
-              <span>{selected.d_address}</span>
+              <span>{selected.address}</span>
             </div>
 
             <div className="flex items-center justify-between">
@@ -150,20 +156,81 @@ export default function CompanyName() {
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Phone Number</span>
-              <span className="text-right">{selected.d_phone_number}</span>
+              <span className="text-right">{selected.phone_number}</span>
             </div>
 
             <div className="flex items-center justify-between">
               <span className="opacity-60">State of Origin</span>
               <span className="text-right">{selected.origin}</span>
             </div>
-            <h1>Secretary Details</h1>
-
             <div className="flex items-center justify-between">
-              <span className="opacity-60">Address</span>
-              <span>{selected.s_home_address}</span>
+              <span className="opacity-60">LGA of Origin</span>
+              <span className="text-right">{selected.lga1}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Card Number</span>
+              <span className="text-right">{selected.card_number}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Home Address</span>
+              <span className="text-right">{selected.home_address}</span>
+            </div>
+            <hr></hr>
+
+            <h1 style={{
+              fontWeight: "bold"
+            }}> 2nd Director Details</h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Full Name</span>
+              <span>{selected.fullname2}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Email Address</span>
+              <span>{selected.Email_address2}</span>
             </div>
 
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">DOB</span>
+              <span>{new Date(selected.dob2).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Phone Number</span>
+              <span className="text-right">{selected.phone_number2}</span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">State of Origin</span>
+              <span className="text-right">{selected.origin2}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">LGA of Origin</span>
+              <span className="text-right">{selected.lga2}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Card Number</span>
+              <span className="text-right">{selected.card_number2}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Home Address</span>
+              <span className="text-right">{selected.home_address2}</span>
+            </div>
+            <hr></hr>
+            <h1>Secretary Details</h1>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Full Name</span>
+              <span>{selected.d_fullname}</span>
+            </div>
+
+
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">home Address</span>
+              <span>{selected.d_address}</span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Card Number</span>
+              <span>{selected.s_card_number}</span>
+            </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">DOB</span>
               <span>{new Date(selected.s_dob).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</span>
@@ -185,7 +252,13 @@ export default function CompanyName() {
             <div className="pt-3 border-t border-brand-green/10">
               <p className="text-xs uppercase tracking-widest opacity-60 mb-2">Download Images</p>
               <div className="">
-                <div style={{ padding: "20px" }}>
+                <div >
+                  <h1 style={{
+                    fontSize: "13px",
+                    fontWeight: "bold"
+                  }}>
+                    Passport Photograph
+                  </h1>
                   <img
                     style={{
                       width: "80px",
@@ -201,54 +274,65 @@ export default function CompanyName() {
                   >
                     download
                   </button>
-                  <h1 style={{
-                    fontSize: "13px"
-                  }}>
-                    Passport Photograph
-                  </h1>
+
                 </div>
 
-                <div style={{ marginTop: "20px", padding: "20px" }}>
-                  <h1 style={{
-                    fontSize: "14px"
-                  }}>{selected.file2.fileName}</h1>
-
-                  <button
-                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
-
-                    onClick={() => {
-                      const src = baseUrl + selected.file2.fileName;
-                      console.log(src)
-                      downloadImage(src, selected.file2.originalName)
-                    }}>download</button>
+                <div>
                   <h1 style={{
 
-                    fontSize: "13px"
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    marginBottom: "10px"
                   }}>
 
                     Nin Slip
                   </h1>
-                </div>
-                <div style={{ marginTop: "20px", padding: "10px" }}>
-                  <h1 style={{
-                    fontSize: "14px"
-                  }}>{selected.file3.fileName}</h1>
+                  <img
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      objectFit: "cover",
+                      marginBottom: "10px"
+                    }}
+                    src={baseUrl2 + selected.file2.fileName} alt={selected.file2.originalName} />
 
                   <button
                     className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected.file2.fileName, selected.file2.fileName)}
+                  >
+                    download
+                  </button>
 
-                    onClick={() => {
-                      const src = baseUrl + selected.file3.fileName;
-                      console.log(src)
-                      downloadImage(src, selected.file3.originalName)
-                    }}>download</button>
+
+
+                </div>
+                <div>
                   <h1 style={{
 
-                    fontSize: "13px"
+                    fontSize: "13px",
+                    fontWeight: "bold",
+                    marginBottom: "10px"
                   }}>
 
                     Signature
                   </h1>
+                  <img
+                    style={{
+                      width: "80px",
+                      height: "80px",
+                      objectFit: "cover",
+                      marginBottom: "10px"
+                    }}
+                    src={baseUrl2 + selected.file3.fileName} alt={selected.file3.originalName} />
+
+
+                  <button
+                    className="flex-1 px-3 py-2 rounded-full text-xs font-semibold border transition-colors"
+                    onClick={() => handleDownload(baseUrl + selected.file3.fileName, selected.file3.fileName)}
+                  >
+                    download
+                  </button>
+
                 </div>
 
               </div>
