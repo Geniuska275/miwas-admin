@@ -152,7 +152,7 @@ export default function CompanyName() {
 
             <div className="flex items-center justify-between">
               <span className="opacity-60">DOB</span>
-              <span>{new Date(selected.d_dob).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</span>
+              <span>{new Date(selected.dob).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="opacity-60">Phone Number</span>
@@ -223,7 +223,7 @@ export default function CompanyName() {
 
 
             <div className="flex items-center justify-between">
-              <span className="opacity-60">home Address</span>
+              <span className="opacity-60">Email Address</span>
               <span>{selected.d_address}</span>
             </div>
 
@@ -247,6 +247,10 @@ export default function CompanyName() {
             <div className="flex items-center justify-between">
               <span className="opacity-60">local Govt of Origin</span>
               <span className="text-right">{selected.l_origin}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Home Address</span>
+              <span className="text-right">{selected.s_home_address}</span>
             </div>
 
             <div className="pt-3 border-t border-brand-green/10">
