@@ -203,6 +203,10 @@ export default function Ngos() {
               <span className="opacity-60">LGA of Origin</span>
               <span>{selected.l_origin}</span>
             </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Home Address</span>
+              <span>{selected.d_home_address}</span>
+            </div>
 
             <h1 style={{
               fontWeight: "bold",
@@ -234,6 +238,10 @@ export default function Ngos() {
             <div className="flex items-center justify-between">
               <span className="opacity-60">Card Number</span>
               <span>{selected.s_card_number}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="opacity-60">Home Address</span>
+              <span>{selected.s_home_address}</span>
             </div>
 
             <div className="pt-3 border-t border-brand-green/10">
