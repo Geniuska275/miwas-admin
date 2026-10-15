@@ -99,7 +99,7 @@ export default function Resume() {
                 <td>
                   <p className="text-xs opacity-50">{b.gender}</p>
                 </td>
-                <td className="px-5 py-3.5 opacity-60">{new Date(b.createdAt).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</td>
+                <td className="px-5 py-3.5 opacity-60">{new Date(b.dob).toLocaleDateString("en-NG", { day: "numeric", month: "short", year: "numeric" })}</td>
 
                 <td className="px-5 py-3.5 opacity-80">{b.l_origin}</td>
                 <td className="px-5 py-3.5 opacity-80">{b.origin}</td>
