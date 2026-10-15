@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 
 const DEMO_EMAIL = "info@meganet.com.ng";
-const DEMO_PASSWORD = "meganet";
+const DEMO_PASSWORD = "meganet2026.";
 const SESSION_KEY = "vd_admin_session";
 
 const AuthContext = createContext(null);
